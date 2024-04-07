@@ -9,18 +9,18 @@ Mostly 100/100 solutions for TU Delft's CSE1305 Algorithms and Data Structures c
 
 ## 2019-2020 Final
 - Implementation 1 (MulitMap): 100/100
-- Implementation 2 (`indexSort`): 90/100
+- Implementation 2 (`indexSort`): 100/100
 - Implementation 3 (`isRedBlackTree`): 100/100
 - Implementation 4 (`shortestPath`): 100/100
 
 ## 2020-2021 Final
 - Radix Sort (LSD): 100/100
 - DL Skip List: 100/100
-- MWST: 78/100
+- MWST: 98/100
 - Kruskal: 100/100
 
 ## 2021-2022 Final
-- Assignment 1 (`countSubstringOccurences`): 65/100 (last method should work, but might not be O(1))
+- Assignment 1 (`countSubstringOccurences`): 100/100
 - Assignment 2 (`SolutionHashTable`): 100/100
 - Assignment 3 (`mergeSortBottomUp`): 100/100
 - Assignment 4 (`GraphChecker`): 84/100

@@ -1,3 +1,5 @@
+package weblab;
+
 import java.util.*;
 
 public class Solution {
@@ -13,32 +15,20 @@ public class Solution {
      * Note: There should be no entries in the map for substrings that do not occur in string s.
      */
     public static Map<String, Integer> countSubstringOccurrences(String s, int k) {
-        // TODO
-        Map<String, Integer> result = new HashMap<>();
-        int i = 0;
-        int j = k;
-
-        while (j < s.length()+1) {
-            String substring = s.substring(i, j);
-            int occurence = 1;
-            if(result.containsKey(substring)){
-                occurence += result.get(substring);
+      // TODO
+        Map<String, Integer> m = new HashMap<>();
+        for(int i =0; i < s.length();i++){
+            int endIndex = i+k;
+            if(endIndex>s.length()) continue;
+            String substring = s.substring(i,endIndex);
+            
+            if(m.get(substring)==null){
+                m.put(substring,1);
+            }else{
+                m.put(substring,m.get(substring)+1);
             }
-
-            result.put(substring, occurence);
-
-            i++;
-            j++;
         }
-
-        return result;
-    }
-
-    public static void print(Map<String, Integer> map) {
-        Set<String> keyset = map.keySet();
-        for(String key : keyset) {
-            System.out.print("Key: " + key + " - Value: " +map.get(key) + "\n");
-        }
+        return m;
     }
 
     /**
@@ -53,13 +43,31 @@ public class Solution {
      */
     public static Map<String, Integer> countSubstringOccurrences(String s) {
         // TODO
-        Map<String, Integer> result = new LinkedHashMap<>();
-        for(int k = 1; k <= s.length(); k++) {
-            result.putAll(countSubstringOccurrences(s, k));
+        Map<String, Integer> m = new LinkedHashMap <>();
+        for(int i =0; i <= s.length(); i++){
+            //i is the length.
+            for(int j = 0; j < s.length(); j++){
+                int length = i;
+                //System.out.println("length: " + length);
+                if(j+i>s.length()) continue;
+                String substring = s.substring(j,j+i);
+                Map<String, Integer> r = countSubstringOccurrences(substring,length);
+                //so now i have the map for each length, each string.
+                //add it to the main map.
+                for(String k : r.keySet()){
+                    System.out.println(k);
+                    if(m.get(k)==null){
+                        m.put(k,r.get(k));
+                    }else{
+                        m.put(k,r.get(k)+m.get(k));
+                    }
+                    
+                }
+            }
         }
 
-        print(result);
-        return result;
+
+        return m;
     }
 
     /**
@@ -70,6 +78,17 @@ public class Solution {
      *     The map from which substrings that do not repeat (occur only once) are to be removed.
      */
     public static void repeatedSubstrings(Map<String, Integer> substringsMap) {
-        substringsMap.values().removeIf(val -> 1 == val);
-    }
+        Set<String> k =  substringsMap.keySet();
+        List<String> a = new ArrayList<>();
+
+        for(String s : k){
+            a.add(s);
+        }
+
+        for(int i =0; i < a.size();i++){
+            if(substringsMap.get(a.get(i))==1){
+                substringsMap.remove(a.get(i));
+            }
+        }
+    }
 }
