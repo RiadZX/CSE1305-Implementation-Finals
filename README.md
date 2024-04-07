@@ -16,7 +16,7 @@ Mostly 100/100 solutions for TU Delft's CSE1305 Algorithms and Data Structures c
 ## 2020-2021 Final
 - Radix Sort (LSD): 100/100
 - DL Skip List: 100/100
-- MWST: 78/100
+- MWST: 98/100
 - Kruskal: 100/100
 
 ## 2021-2022 Final
