@@ -20,7 +20,7 @@ Mostly 100/100 solutions for TU Delft's CSE1305 Algorithms and Data Structures c
 - Kruskal: 100/100
 
 ## 2021-2022 Final
-- Assignment 1 (`countSubstringOccurences`): 65/100 (last method should work, but might not be O(1))
+- Assignment 1 (`countSubstringOccurences`): 100/100
 - Assignment 2 (`SolutionHashTable`): 100/100
 - Assignment 3 (`mergeSortBottomUp`): 100/100
 - Assignment 4 (`GraphChecker`): 84/100
