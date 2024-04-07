@@ -11,34 +11,19 @@ class GraphChecker {
      * @return List of IDs of vertices found using DFS traversal.
      */
     public List<Integer> traverseDepthFirst(Graph g, Vertex v) {
-        // TODO
-        List<Integer> visited = new LinkedList<>();
-        List<Vertex> known = new LinkedList<>();
-        Stack<Vertex> stack = new Stack<>();
-        stack.push(v);
-
-        while(!stack.isEmpty()) {
-            Vertex opVertex = stack.pop();
-            visited.add(opVertex.getId());
-            known.add(opVertex);
-
-            List<Vertex> neighbours = opVertex.getNeighbours();
-            neighbours.sort(Collections.reverseOrder(Comparator.comparing(Vertex::getId)));
-
-            for(Vertex vertex : neighbours) {
-                if (!known.contains(vertex)){
-                    stack.push(vertex);
-                }
+        Set<Integer> s = new HashSet<>();
+        return traverseDepthFirstHelper(g,v,s);
+    }
+    public List<Integer> traverseDepthFirstHelper(Graph g,Vertex v, Set<Integer> s){
+        List<Integer> result = new ArrayList<>();
+        result.add(v.getId());
+        s.add(v.getId());
+        for(Vertex next:v.getNeighbours()){
+            if(!s.contains(next.getId())){
+                result.addAll(traverseDepthFirstHelper(g,next,s));
             }
         }
-
-        return visited;
-    }
-
-    public void print(List<Integer> list) {
-        for (int i : list) {
-            System.out.print(i + " ");
-        }
+        return result;
     }
 
     /**
@@ -48,19 +33,22 @@ class GraphChecker {
      * @return Transpose of the given graph.
      */
     public Graph transpose(Graph g) {
-        // TODO
-
-        Graph transposed = new Graph();
-        for (Vertex v : g.getAllVertices()) {
-            transposed.addVertex(new Vertex(v.getId()));
+        Graph result = new Graph();
+        List<Vertex> vertexes =  g.getAllVertices();
+        for(Vertex next: vertexes){
+            result.addVertex(new Vertex(next.getId()));
         }
 
-        for (Vertex v : g.getAllVertices()) {
-            for (Vertex x : v.getNeighbours()) {
-                transposed.getVertex(x.getId()).addNeighbour(v);
+        for(Vertex next:vertexes){
+            //  System.out.print(next.getId());
+            for(Vertex neighbour : next.getNeighbours()){
+                // System.out.print(neighbour.getId());
+                result.addEdge(result.getVertex(neighbour.getId()),
+                        result.getVertex(next.getId()));
             }
+            // System.out.println();
         }
-        return transposed;
+        return result;
     }
 
     /**
@@ -70,14 +58,10 @@ class GraphChecker {
      * @return True if the graph is strongly connected, false otherwise.
      */
     public boolean isStronglyConnected(Graph g) {
-        // TODO
-        for(Vertex v : g.getAllVertices()) {
-            List<Integer> reachable = traverseDepthFirst(g, v);
-            for(Vertex x : g.getAllVertices()){
-                if (!reachable.contains(x.getId())) return false;
-            }
-        }
-        return true;
+        List<Integer> normalGraphList = traverseDepthFirst(g,g.getVertex(0));
+        List<Integer> transposeGraphList = traverseDepthFirst(transpose(g),(transpose(g)).getVertex(0));
+        return normalGraphList.size() == g.getAllVertices().size() &&
+                normalGraphList.size() == transposeGraphList.size();
     }
 }
 
