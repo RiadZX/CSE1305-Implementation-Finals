@@ -9,7 +9,7 @@ Mostly 100/100 solutions for TU Delft's CSE1305 Algorithms and Data Structures c
 
 ## 2019-2020 Final
 - Implementation 1 (MulitMap): 100/100
-- Implementation 2 (`indexSort`): 90/100
+- Implementation 2 (`indexSort`): 100/100
 - Implementation 3 (`isRedBlackTree`): 100/100
 - Implementation 4 (`shortestPath`): 100/100
 
